@@ -1,5 +1,7 @@
 import requests
 import enum
+from dotenv import load_dotenv
+import os
 
 class RESPONSE_ERRORS(enum.Enum):
     BAD_REQUEST = 400
@@ -88,9 +90,10 @@ class LolApiWrapper:
         return self._make_request(endpoint)
 
 def main():
-    api_key = "RGAPI-0ad14448-dd66-4b82-a779-adf09c728458"
     region = "europe"
-    
+    load_dotenv(dotenv_path="config")
+    api_key = os.getenv("LOL_API_TOKEN")
+
     lolapi = LolApiWrapper(api_key=api_key, region=region)
     
     # Fetch account details
